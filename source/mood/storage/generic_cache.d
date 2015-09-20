@@ -11,7 +11,7 @@ module mood.storage.generic_cache;
     This relies on the fact that posts are changed rarely but served often
     and allows no-lock implicit sharing of cache between worker threads.
  */
-struct Cache(TEntry)
+align(16) struct Cache(TEntry)
 {
     /// pointer to latest cached content
     shared immutable(CacheData!TEntry)* data = new CacheData!TEntry;

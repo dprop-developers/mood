@@ -6,7 +6,7 @@
 
 module mood.util.compat;
 
-static if (__VERSION__ < 2067L):
+static if (__VERSION__ < 2068L):
 
 import std.functional;
 import std.range;
@@ -224,7 +224,12 @@ import std.string;
 import std.range;
 import std.algorithm;
 
-auto lineSplitter(KeepTerminator keepTerm = KeepTerminator.no, Range)(Range r)
+version(LDC)
+{
+}
+else
+{
+private auto lineSplitter(KeepTerminator keepTerm = KeepTerminator.no, Range)(Range r)
     if ((hasSlicing!Range && hasLength!Range) ||
         isSomeString!Range)
 {
@@ -361,4 +366,5 @@ auto lineSplitter(KeepTerminator keepTerm = KeepTerminator.no, Range)(Range r)
     }
 
     return Result(r);
+}
 }
